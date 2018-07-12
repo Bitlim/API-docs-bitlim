@@ -19,13 +19,13 @@ API权限
 签名
 <br>
 ---
-用户提交的参数除signature外都需要参与签名。<br>签名规则：首先将待签名字符串添加私钥按照参数进行升序排序。<br>
+用户提交的参数除sign外都需要参与签名。<br>签名规则：首先将待签名字符串添加私钥按照参数进行升序排序。<br>
 例如：对于如下的参数进行签名(下单交易)<br>
 `String[] parameters= {"jbaaaaaaaa", "GTB_ETH", "1", "0.00731001", "48.6", "484001531279255241", "feefefdafdfefsfdsfe"}。`<br>
 生成待签名的字符串<br>
 `"0.00731001148.6484001531279255241GTB_ETHfeefefdafdfefsfdsfejbaaaaaaaa"。`<br>
 最后将字符串进行SHA1加密，得到最终的字符串<br>
-`"6454ed40e1db21a57f477f482584adc2f41d5c9d"（该字符串赋值于参数signature）`。<br>
+`"6454ed40e1db21a57f477f482584adc2f41d5c9d"（该字符串赋值于参数sign）`。<br>
 
 
 
