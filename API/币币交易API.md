@@ -71,7 +71,7 @@ entrust_sn:订单号
 
 <br>
 --
-　3.POST /api/entrust/done.do 单次下单交易（访问频率 60次/2秒）<br>
+　3.POST /api/entrust/done.do 批量下单交易（访问频率 60次/2秒）<br>
     URL `https://api.bitlim.com/api/entrust/batch_done.do`<br>
 示例<br>
 
@@ -100,7 +100,7 @@ data:委托结果,结果顺序和下单参数data顺序一致,code：返回状�
 | nonce		    	| String   	  	|   是   |   18位随机数               |
 | sign   	| String   	    |   是   |   请求参数的签名            |
 
-　4.POST /api/entrust/batch_cancel.do 单次撤单交易（访问频率 10次/2秒）<br>
+　4.POST /api/entrust/batch_cancel.do 批量撤单交易（访问频率 10次/2秒）<br>
     URL `https://api.bitlim.com/api/entrust/batch_cancel.do`<br>
 示例<br>
 
