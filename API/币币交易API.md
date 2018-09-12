@@ -8,7 +8,7 @@
 API参考
 <br>
 --
-　1.POST /api/entrust/done.do 下单交易（访问频率 10次/2秒）<br>
+　1.POST /api/entrust/done.do 单次下单交易（访问频率 60次/2秒）<br>
     URL `https://api.bitlim.com/api/entrust/done.do`<br>
 示例<br>
 
