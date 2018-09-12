@@ -40,7 +40,7 @@ entrust_sn:订单号
 | nonce		    	| String   	  	|   是   |   18位随机数               |
 | sign   	| String   	    |   是   |   请求参数的签名            |
 
-　2.POST /api/entrust/cancel.do 撤单交易（访问频率 10次/2秒）<br>
+　2.POST /api/entrust/cancel.do    单次撤单交易（访问频率 10次/2秒）<br>
     URL `https://api.bitlim.com/api/entrust/cancel.do`<br>
 示例<br>
 
@@ -69,7 +69,69 @@ entrust_sn:订单号
 | nonce		    	| String   	  	|   是   |   18位随机数               |
 | sign   	| String   	    |   是   |   请求参数的签名            |
 
-　3.POST /api/entrustfind/notall_search.do 查询委托记录（访问频率 10次/2秒）<br>
+<br>
+--
+　3.POST /api/entrust/done.do 单次下单交易（访问频率 60次/2秒）<br>
+    URL `https://api.bitlim.com/api/entrust/batch_done.do`<br>
+示例<br>
+
+```
+Request
+POST　https://api.bitlim.com/api/entrust/batch_done.do
+Response
+{
+　　"code": 0,
+    "langkey": "entrust_success",
+    "data": [{"code":0,"entrust_sn":"20180711000035727735"},{"code":0,"entrust_sn":"20180711000035727736"}]
+}
+```
+返回值说明
+```
+code：返回状态，0成功，第一条委托下单状态,
+langkey：返回消息第一条委托下单提示
+data:委托结果,结果顺序和下单参数data顺序一致,code：返回状态，0成功，entrust_sn委托单号
+```
+请求参数
+
+| 参数名	        | 参数类型	    |  必填  | 描述 |
+| ------------- |:-------------:| :-----: |:-----:  |
+| api_key    	  | String		    |   是   |   用户申请的api_key        |
+| data    	  | String		    |   是   | 值必须是json格式字符串, 例"[{"symbol":"ETH_BTC","trade_type":1,"price":"1.23","num":"2"}]",symbol交易对类型（GTB_ETH）,trade_type 交易类型（1买入，2卖出）,price下单价格,num下单数量|
+| nonce		    	| String   	  	|   是   |   18位随机数               |
+| sign   	| String   	    |   是   |   请求参数的签名            |
+
+　4.POST /api/entrust/batch_cancel.do 单次撤单交易（访问频率 10次/2秒）<br>
+    URL `https://api.bitlim.com/api/entrust/batch_cancel.do`<br>
+示例<br>
+
+```
+Request
+POST　https://api.bitlim.com/api/entrust/batch_cancel.do
+Response
+{
+    "code": 0,
+    "entrust_sns": {"20180711000035727734":-1,"20180711000035727735":-1},
+    "langkey": "cancel_success"
+}
+```
+返回值说明
+```
+code：返回状态，0成功，第一条委托撤销状态
+langkey：返回消息，第一条委托撤销提示
+entrust_sns:订单结果列表,委托单撤销状态 //委托单对应的值,撤销状态 -4格式不正确,委托单不存在,无权操作,-3撤单处理中,-2撤销失败,-1已撤销 2:完全成交
+
+```
+请求参数
+
+| 参数名	        | 参数类型	    |  必填  | 描述 |
+| ------------- |:-------------:| :-----: |:-----:  |
+| api_key    	  | String		    |   是   |   用户申请的api_key        |
+| entrust_sns      	| String        |   是   |  值必须是json格式字符串,"{"20180711000035727734","20180711000035727735"]"    |
+| nonce		    	| String   	  	|   是   |   18位随机数               |
+| sign   	| String   	    |   是   |   请求参数的签名            |
+
+
+　5.POST /api/entrustfind/notall_search.do 查询委托记录（访问频率 10次/2秒）<br>
     URL `https://api.bitlim.com/api/entrustfind/notall_search.do`<br>
 示例<br>
 
@@ -126,7 +188,7 @@ symbol：委托交易对
 | nonce   	| String   	    |   是   |   18位随机数            |
 | sign   	| String   	    |   是   |   请求参数的签名            |
 
-　4.POST /api/usercoin/get_balance.do 查询用户信息（访问频率 10次/2秒）<br>
+　6.POST /api/usercoin/get_balance.do 查询用户信息（访问频率 10次/2秒）<br>
     URL `https://api.bitlim.com/api/usercoin/get_balance.do`<br>
 示例<br>
 
@@ -167,7 +229,7 @@ frozen：账户冻结余额
 | nonce   	| String   	    |   是   |   18位随机数            |
 | sign   	| String   	    |   是   |   请求参数的签名            |
 
-　5.POST /api/entrustfind/deal_search.do 查询历史记录（访问频率 10次/2秒）<br>
+　7.POST /api/entrustfind/deal_search.do 查询历史记录（访问频率 10次/2秒）<br>
     URL `https://api.bitlim.com/api/entrustfind/deal_search.do`<br>
 示例<br>
 
@@ -226,7 +288,7 @@ symbol：委托交易对
 | nonce   	| String   	    |   是   |   18位随机数            |
 | sign   	| String   	    |   是   |   请求参数的签名            |
 
-　6.POST /market/trade/ticker 查询币种行情（访问频率 10次/2秒）<br>
+　8.POST /market/trade/ticker 查询币种行情（访问频率 10次/2秒）<br>
     URL `https://api.bitlim.com/market/trade/ticker`<br>
 示例<br>
 
@@ -268,7 +330,7 @@ date:当前时间戳
 | api_key    	  | String		    |   是   |   用户申请的api_key        |
 | symbol		    	| String   	  	|   是   |   交易对类型，如指定（GTB_ETH）               |
 
-　7.POST /market/trade/kline 查询K线数据（访问频率 10次/2秒）<br>
+　9.POST /market/trade/kline 查询K线数据（访问频率 10次/2秒）<br>
     URL `https://api.bitlim.com/market/trade/kline`<br>
 示例<br>
 
